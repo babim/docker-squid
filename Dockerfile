@@ -1,12 +1,12 @@
 FROM babim/debianbase
 
-ENV SQUID_VERSION= \
+ENV SQUID_VERSION=3 \
     SQUID_CACHE_DIR=/var/spool/squid3 \
     SQUID_LOG_DIR=/var/log/squid3 \
     SQUID_USER=proxy
 
 RUN apt-get update \
- && DEBIAN_FRONTEND=noninteractive apt-get install -y squid3 \
+ && DEBIAN_FRONTEND=noninteractive apt-get install -y squid${SQUID_VERSION} \
  && mv /etc/squid3/squid.conf /etc/squid3/squid.conf.dist \
  && rm -rf /var/lib/apt/lists/*
 
