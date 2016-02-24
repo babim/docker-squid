@@ -1,6 +1,11 @@
 #!/bin/bash
 set -e
 
+if [ -z "`ls ${SQUID_DIR} --hide='lost+found'`" ] 
+then
+	cp -R /etc-start/* ${SQUID_DIR}
+fi
+
 create_log_dir() {
   mkdir -p ${SQUID_LOG_DIR}
   chmod -R 755 ${SQUID_LOG_DIR}
