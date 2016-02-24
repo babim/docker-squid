@@ -18,9 +18,9 @@ create_cache_dir() {
 }
 
 apply_backward_compatibility_fixes() {
-  if [[ -f /etc/squid3/squid.user.conf ]]; then
-    rm -rf /etc/squid3/squid.conf
-    ln -sf /etc/squid3/squid.user.conf /etc/squid3/squid.conf
+  if [[ -f ${SQUID_CONFIG_DIR}/squid.user.conf ]]; then
+    rm -rf ${SQUID_CONFIG_DIR}/squid.conf
+    ln -sf ${SQUID_CONFIG_DIR}/squid.user.conf ${SQUID_CONFIG_DIR}/squid.conf
   fi
 }
 
@@ -32,7 +32,7 @@ apply_backward_compatibility_fixes
 if [[ ${1:0:1} = '-' ]]; then
   EXTRA_ARGS="$@"
   set --
-elif [[ ${1} == squid3 || ${1} == $(which squid3) ]]; then
+elif [[ ${1} == squid${SQUID_VERSION} || ${1} == $(which squid${SQUID_VERSION}) ]]; then
   EXTRA_ARGS="${@:2}"
   set --
 fi
@@ -41,10 +41,10 @@ fi
 if [[ -z ${1} ]]; then
   if [[ ! -d ${SQUID_CACHE_DIR}/00 ]]; then
     echo "Initializing cache..."
-    $(which squid3) -N -f /etc/squid3/squid.conf -z
+    $(which squid${SQUID_VERSION}) -N -f ${SQUID_CONFIG_DIR}/squid.conf -z
   fi
   echo "Starting squid3..."
-  exec $(which squid3) -f /etc/squid3/squid.conf -NYCd 1 ${EXTRA_ARGS}
+  exec $(which squid${SQUID_VERSION}) -f ${SQUID_CONFIG_DIR}/squid.conf -NYCd 1 ${EXTRA_ARGS}
 else
   exec "$@"
 fi
