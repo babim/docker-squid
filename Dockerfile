@@ -1,6 +1,7 @@
 FROM babim/debianbase
 
 ENV SQUID_VERSION=3 \
+    SQUID_VERSION_MINOR= \
     SQUID_CACHE_DIR=/var/spool/squid${SQUID_VERSION} \
     SQUID_LOG_DIR=/var/log/squid${SQUID_VERSION} \
     SQUID_DIR=/squid \
@@ -8,7 +9,7 @@ ENV SQUID_VERSION=3 \
     SQUID_USER=proxy
 
 RUN apt-get update \
- && DEBIAN_FRONTEND=noninteractive apt-get install -y squid${SQUID_VERSION} \
+ && DEBIAN_FRONTEND=noninteractive apt-get install -y squid${SQUID_VERSION}${SQUID_VERSION_MINOR} \
  && mv /etc/squid${SQUID_VERSION}/squid.conf /etc/squid${SQUID_VERSION}/squid.conf.dist
 
 COPY squid.conf ${SQUID_CONFIG_DIR}/squid.conf
