@@ -7,10 +7,15 @@ Start Squid using:
 ```bash
 docker run --name squid -d --restart=always \
   --publish 3128:3128 \
-  --volume /srv/docker/squid/cache:/var/spool/squid3 \
+  --volume /srv/docker/squid/:/squid \
   babim/squid
 ```
-
+Volume dir:
+```
+/squid/cache
+/squid/log
+/squid/config
+```
 ## Command-line arguments
 
 You can customize the launch command of the Squid server by specifying arguments to `squid3` on the `docker run` command. For example the following command prints the help menu of `squid3` command:
