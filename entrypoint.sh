@@ -1,6 +1,13 @@
 #!/bin/bash
 set -e
 
+SQUID_VERSION=3
+SQUID_CACHE_DIR=/var/spool/squid${SQUID_VERSION}
+SQUID_LOG_DIR=/var/log/squid${SQUID_VERSION}
+SQUID_DIR=/squid
+SQUID_CONFIG_DIR=/etc/squid${SQUID_VERSION}
+SQUID_USER=proxy
+    
 if [ -z "`ls ${SQUID_DIR} --hide='lost+found'`" ] 
 then
 	cp -R /etc-start/* ${SQUID_DIR}
