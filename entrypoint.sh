@@ -6,9 +6,9 @@ SQUID_CACHE_DIR=/var/spool/squid${SQUID_VERSION}
 SQUID_LOG_DIR=/var/log/squid${SQUID_VERSION}
 SQUID_DIR=/squid
 SQUID_CONFIG_DIR=/etc/squid${SQUID_VERSION}
-SQUID_USER=proxy
+SQUID_USER=${USER:-proxy}
     
-if [ -z "`ls ${SQUID_DIR} --hide='lost+found'`" ] 
+if [ -z "`ls ${SQUID_DIR} --hide='lost+found'`" ] || [ -z "`ls ${SQUID_CONFIG_DIR}`" ] 
 then
 	cp -R /etc-start/* ${SQUID_DIR}
 fi
@@ -16,11 +16,13 @@ fi
 create_log_dir() {
   [[ -d ${SQUID_LOG_DIR} ]] || mkdir -p ${SQUID_LOG_DIR}
   chmod -R 755 ${SQUID_LOG_DIR}
+  chown -R ${SQUID_USER}:${SQUID_USER} ${SQUID_DIR}/log
   chown -R ${SQUID_USER}:${SQUID_USER} ${SQUID_LOG_DIR}
 }
 
 create_cache_dir() {
   [[ -d ${SQUID_CACHE_DIR} ]] || mkdir -p ${SQUID_CACHE_DIR}
+  chown -R ${SQUID_USER}:${SQUID_USER} ${SQUID_DIR}/cache
   chown -R ${SQUID_USER}:${SQUID_USER} ${SQUID_CACHE_DIR}
 }
 
