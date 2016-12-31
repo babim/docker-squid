@@ -1,6 +1,8 @@
 [![](https://images.microbadger.com/badges/image/babim/squid.svg)](https://microbadger.com/images/babim/squid "Get your own image badge on microbadger.com")[![](https://images.microbadger.com/badges/version/babim/squid.svg)](https://microbadger.com/images/babim/squid "Get your own version badge on microbadger.com")
 [![](https://images.microbadger.com/badges/image/babim/squid:auth.svg)](https://microbadger.com/images/babim/squid:auth "Get your own image badge on microbadger.com")[![](https://images.microbadger.com/badges/version/babim/squid:auth.svg)](https://microbadger.com/images/babim/squid:auth "Get your own version badge on microbadger.com")
-[![](https://images.microbadger.com/badges/image/babim/squid:simpleauth.svg)](https://microbadger.com/images/babim/squid:simpleauth "Get your own image badge on microbadger.com")[![](https://images.microbadger.com/badges/version/babim/squid:simpleauth.svg)](https://microbadger.com/images/babim/squid:simpleauth "Get your own version badge on microbadger.com")
+
+[![](https://images.microbadger.com/badges/image/babim/squid:alpine.svg)](https://microbadger.com/images/babim/squid:alpine "Get your own image badge on microbadger.com")[![](https://images.microbadger.com/badges/version/babim/squid:alpine.svg)](https://microbadger.com/images/babim/squid:alpine "Get your own version badge on microbadger.com")
+[![](https://images.microbadger.com/badges/image/babim/squid:alpine.auth.svg)](https://microbadger.com/images/babim/squid:alpine.auth "Get your own image badge on microbadger.com")[![](https://images.microbadger.com/badges/version/babim/squid:alpine.auth.svg)](https://microbadger.com/images/babim/squid:alpine.auth "Get your own version badge on microbadger.com")
 
 (Thanks sameersbn)
 
