@@ -16,9 +16,9 @@ COPY entrypoint.sh /sbin/entrypoint.sh
 RUN chmod 755 /sbin/entrypoint.sh
 
 # change to one directory
-RUN [ -d ${SQUID_CACHE_DIR} ] || mkdir -p ${SQUID_CACHE_DIR} && \
-    [ -d ${SQUID_LOG_DIR} ] || mkdir -p ${SQUID_LOG_DIR} && \
-    [ -d ${SQUID_DIR} ] || mkdir -p ${SQUID_DIR} && \
+RUN [ ! -d ${SQUID_CACHE_DIR} ] || mkdir -p ${SQUID_CACHE_DIR} && \
+    [ ! -d ${SQUID_LOG_DIR} ] || mkdir -p ${SQUID_LOG_DIR} && \
+    [ ! -d ${SQUID_DIR} ] || mkdir -p ${SQUID_DIR} && \
     mv ${SQUID_CACHE_DIR} ${SQUID_DIR}/cache && ln -s ${SQUID_DIR}/cache ${SQUID_CACHE_DIR} && \
     mv ${SQUID_LOG_DIR} ${SQUID_DIR}/log && ln -s ${SQUID_DIR}/log ${SQUID_LOG_DIR} && \
     mv ${SQUID_CONFIG_DIR} ${SQUID_DIR}/config && ln -s ${SQUID_DIR}/config ${SQUID_CONFIG_DIR} && \
