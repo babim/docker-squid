@@ -4,7 +4,14 @@
 [![](https://images.microbadger.com/badges/image/babim/squid:alpine.svg)](https://microbadger.com/images/babim/squid:alpine "Get your own image badge on microbadger.com")[![](https://images.microbadger.com/badges/version/babim/squid:alpine.svg)](https://microbadger.com/images/babim/squid:alpine "Get your own version badge on microbadger.com")
 [![](https://images.microbadger.com/badges/image/babim/squid:alpine.auth.svg)](https://microbadger.com/images/babim/squid:alpine.auth "Get your own image badge on microbadger.com")[![](https://images.microbadger.com/badges/version/babim/squid:alpine.auth.svg)](https://microbadger.com/images/babim/squid:alpine.auth "Get your own version badge on microbadger.com")
 
+[![](https://images.microbadger.com/badges/image/babim/squid:alpine.public.svg)](https://microbadger.com/images/babim/squid:alpine.public "Get your own image badge on microbadger.com")[![](https://images.microbadger.com/badges/version/babim/squid:alpine.public.svg)](https://microbadger.com/images/babim/squid:alpine.public "Get your own version badge on microbadger.com")
+[![](https://images.microbadger.com/badges/image/babim/squid:alpine.public.auth.svg)](https://microbadger.com/images/babim/squid:alpine.public.auth "Get your own image badge on microbadger.com")[![](https://images.microbadger.com/badges/version/babim/squid:alpine.public.auth.svg)](https://microbadger.com/images/babim/squid:alpine.public.auth "Get your own version badge on microbadger.com")
+
 (Thanks sameersbn)
+
+public = allow 0.0.0.0
+
+auth = need user/pass (default foo/bar)
 
 ## Quickstart
 
