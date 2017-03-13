@@ -50,10 +50,10 @@ fi
 if [[ -z ${1} ]]; then
   if [[ ! -d ${SQUID_CACHE_DIR}/00 ]]; then
     echo "Initializing cache..."
-    $(which squid3) -N -f /etc/squid3/squid.conf -z
+    $(which squid3) -N -f ${SQUID_CONFIG_DIR}/squid.conf -z
   fi
   echo "Starting squid3..."
-  exec $(which squid3) -f /etc/squid3/squid.conf -NYCd 1 ${EXTRA_ARGS}
+  exec $(which squid3) -f ${SQUID_CONFIG_DIR}/squid.conf -NYCd 1 ${EXTRA_ARGS}
 else
   exec "$@"
 fi
