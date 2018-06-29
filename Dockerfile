@@ -1,4 +1,4 @@
-FROM babim/debianbase
+FROM babim/debianbase:8
 
 ENV SQUID_VERSION=3 \
     SQUID_CACHE_DIR=/var/spool/squid3 \
