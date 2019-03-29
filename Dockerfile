@@ -1,39 +1,20 @@
-FROM babim/debianbase:8
+FROM babim/alpinebase:3.9
 
-ENV SQUID_VERSION=3 \
-    SQUID_CACHE_DIR=/var/spool/squid3 \
-    SQUID_LOG_DIR=/var/log/squid3 \
+ENV SQUID_CACHE_DIR=/var/spool/squid \
+    SQUID_LOG_DIR=/var/log/squid \
     SQUID_DIR=/squid \
-    SQUID_CONFIG_DIR=/etc/squid3 \
-    SQUID_USER=proxy
+    SQUID_CONFIG_DIR=/etc/squid \
+    SQUID_USER=squid \
+    SOFT=squid
 
-RUN apt-get update \
- && DEBIAN_FRONTEND=noninteractive apt-get install -y squid${SQUID_VERSION} \
- && mv ${SQUID_CONFIG_DIR}/squid.conf ${SQUID_CONFIG_DIR}/squid.conf.dist
+# download option
+RUN apk add --no-cache wget bash && cd / && wget --no-check-certificate https://raw.githubusercontent.com/babim/docker-tag-options/master/z%20SCRIPT%20AUTO/option.sh && \
+    chmod 755 /option.sh
 
-COPY squid.conf ${SQUID_CONFIG_DIR}/squid.conf
-COPY entrypoint.sh /sbin/entrypoint.sh
-RUN chmod 755 /sbin/entrypoint.sh
-
-# change to one directory
-RUN [ -d ${SQUID_CACHE_DIR} ] || mkdir -p ${SQUID_CACHE_DIR} && \
-    [ -d ${SQUID_LOG_DIR} ] || mkdir -p ${SQUID_LOG_DIR} && \
-    [ -d ${SQUID_DIR} ] || mkdir -p ${SQUID_DIR} && \
-    mv ${SQUID_CACHE_DIR} ${SQUID_DIR}/cache && ln -s ${SQUID_DIR}/cache ${SQUID_CACHE_DIR} && \
-    mv ${SQUID_LOG_DIR} ${SQUID_DIR}/log && ln -s ${SQUID_DIR}/log ${SQUID_LOG_DIR} && \
-    mv ${SQUID_CONFIG_DIR} ${SQUID_DIR}/config && ln -s ${SQUID_DIR}/config ${SQUID_CONFIG_DIR} && \
-    mkdir /etc-start && cp -R ${SQUID_DIR}/* /etc-start
-
-# clean
-RUN apt-get clean && \
-    apt-get autoclean && \
-    apt-get autoremove -y --purge && \
-    rm -rf /build && \
-    rm -rf /tmp/* /var/tmp/* && \
-    rm -rf /var/lib/apt/lists/* && \
-    rm -f /etc/dpkg/dpkg.cfg.d/02apt-speedup
+# install
+RUN wget --no-check-certificate -O - https://raw.githubusercontent.com/babim/docker-tag-options/master/z%20Squid%20install/${SOFT}_install.sh | bash
 
 EXPOSE 3128/tcp
 #VOLUME ["${SQUID_CACHE_DIR}", "${SQUID_LOG_DIR}", "${SQUID_CONFIG_DIR}"]
 VOLUME ["${SQUID_DIR}"]
-ENTRYPOINT ["/sbin/entrypoint.sh"]
+ENTRYPOINT ["/docker-entrypoint.sh"]

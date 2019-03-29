@@ -1,18 +1,3 @@
-[![](https://images.microbadger.com/badges/image/babim/squid.svg)](https://microbadger.com/images/babim/squid "Get your own image badge on microbadger.com")[![](https://images.microbadger.com/badges/version/babim/squid.svg)](https://microbadger.com/images/babim/squid "Get your own version badge on microbadger.com")
-[![](https://images.microbadger.com/badges/image/babim/squid:auth.svg)](https://microbadger.com/images/babim/squid:auth "Get your own image badge on microbadger.com")[![](https://images.microbadger.com/badges/version/babim/squid:auth.svg)](https://microbadger.com/images/babim/squid:auth "Get your own version badge on microbadger.com")
-
-[![](https://images.microbadger.com/badges/image/babim/squid:alpine.svg)](https://microbadger.com/images/babim/squid:alpine "Get your own image badge on microbadger.com")[![](https://images.microbadger.com/badges/version/babim/squid:alpine.svg)](https://microbadger.com/images/babim/squid:alpine "Get your own version badge on microbadger.com")
-[![](https://images.microbadger.com/badges/image/babim/squid:alpine.auth.svg)](https://microbadger.com/images/babim/squid:alpine.auth "Get your own image badge on microbadger.com")[![](https://images.microbadger.com/badges/version/babim/squid:alpine.auth.svg)](https://microbadger.com/images/babim/squid:alpine.auth "Get your own version badge on microbadger.com")
-
-[![](https://images.microbadger.com/badges/image/babim/squid:alpine.public.svg)](https://microbadger.com/images/babim/squid:alpine.public "Get your own image badge on microbadger.com")[![](https://images.microbadger.com/badges/version/babim/squid:alpine.public.svg)](https://microbadger.com/images/babim/squid:alpine.public "Get your own version badge on microbadger.com")
-[![](https://images.microbadger.com/badges/image/babim/squid:alpine.public.auth.svg)](https://microbadger.com/images/babim/squid:alpine.public.auth "Get your own image badge on microbadger.com")[![](https://images.microbadger.com/badges/version/babim/squid:alpine.public.auth.svg)](https://microbadger.com/images/babim/squid:alpine.public.auth "Get your own version badge on microbadger.com")
-
-(Thanks sameersbn)
-
-public = allow 0.0.0.0
-
-auth = need user/pass (default foo/bar)
-
 ## Quickstart
 
 Start Squid using:
@@ -29,33 +14,21 @@ Volume dir:
 /squid/log
 /squid/config
 ```
-## Command-line arguments
 
-You can customize the launch command of the Squid server by specifying arguments to `squid3` on the `docker run` command. For example the following command prints the help menu of `squid3` command:
+## authentication
+The user must specify authentication credentials via the following environment variables:
 
-```bash
-docker run --name squid -it --rm \
-  --publish 3128:3128 \
-  --volume /srv/docker/squid/cache:/var/spool/squid3 \
-  babim/squid -h
+```
+-e AUTH=true
+USERNAME=foo (default)
+PASSWORD=bar (default)
 ```
 
-## Configuration
+## Public access
+You can access from internet via the following environment variables:
 
-Squid is a full featured caching proxy server and a large number of configuration parameters. To configure Squid as per your requirements edit the default [squid.conf](squid.conf) and volume mount it at `/etc/squid3/squid.conf`.
-
-```bash
-docker run --name squid -d --restart=always \
-  --publish 3128:3128 \
-  --volume /path/to/squid.conf:/etc/squid3/squid.conf \
-  --volume /srv/docker/squid/cache:/var/spool/squid3 \
-  babim/squid
 ```
-
-To reload the Squid configuration on a running instance you can send the `HUP` signal to the container.
-
-```bash
-docker kill -s HUP squid
+-e PUBLIC=true
 ```
 
 ## Usage
@@ -80,13 +53,13 @@ ENV http_proxy=http://172.17.42.1:3128 \
 
 ## Logs
 
-To access the Squid logs, located at `/var/log/squid3/`, you can use `docker exec`. For example, if you want to tail the access logs:
+To access the Squid logs, located at `/var/log/squid/`, you can use `docker exec`. For example, if you want to tail the access logs:
 
 ```bash
-docker exec -it squid tail -f /var/log/squid3/access.log
+docker exec -it squid tail -f /var/log/squid/access.log
 ```
 
-You can also mount a volume at `/var/log/squid3/` so that the logs are directly accessible on the host.
+You can also mount a volume at `/var/log/squid/` so that the logs are directly accessible on the host.
 
 ## Shell Access
 
