@@ -1,4 +1,5 @@
 ## Quickstart
+(thanks Sameer Naik - sameersbn)
 
 Start Squid using:
 
