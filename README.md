@@ -61,11 +61,3 @@ docker exec -it squid tail -f /var/log/squid/access.log
 ```
 
 You can also mount a volume at `/var/log/squid/` so that the logs are directly accessible on the host.
-
-## Shell Access
-
-For debugging and maintenance purposes you may want access the containers shell. If you are using Docker version `1.3.0` or higher you can access a running containers shell by starting `bash` using `docker exec`:
-
-```bash
-docker exec -it squid bash
-```
